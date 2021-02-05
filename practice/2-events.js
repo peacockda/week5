@@ -2,6 +2,19 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max)) + 1
 }
 
+function rollDice(){
+  let diceElement = document.querySelector(".dice")
+  let die1 = getRandomInt(6)
+  let die2 = getRandomInt(6)
+  // console.log(`Die 1 is ${die1}`)
+  // console.log(`Die 2 is ${die2}`)
+  diceElement.innerHTML = `
+  <img src="../images/dice/${die1}.png" class="die w-1/2 md:w-1/6">
+  <img src="../images/dice/${die2}.png" class="die w-1/2 md:w-1/6">
+  `
+  return die1 + die2
+}
+
 window.addEventListener('DOMContentLoaded', function () {
 
   // 1. use final code from practice/1-dom.js to modify dice
@@ -11,6 +24,18 @@ window.addEventListener('DOMContentLoaded', function () {
   //    b. insert <li> with player name and dice total: `<li>______ rolled __</li>
 
   // ⬇️ ⬇️ ⬇️ YOUR CODE GOES HERE ⬇️ ⬇️ ⬇️
+  rollDice()
+  let rollButton = document.querySelector('#roll-button')
+  rollButton.addEventListener('click',function(){
+    let result = rollDice()
+    // console.log(`Result is ${result}`)
+    let playerName = document.querySelector('#player').value
+    // console.log(playerName)
+    let resultArea = document.querySelector('.result')
+    resultArea.insertAdjacentHTML('beforeend', `
+      <li>${playerName} rolled a ${result}<\li>
+    `)
+  })
 
   // ⬆️ ⬆️ ⬆️ YOUR CODE ENDS HERE. DON'T CHANGE ANY OTHER CODE ⬆️ ⬆️ ⬆️
 })
