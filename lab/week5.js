@@ -70,6 +70,4 @@ window.addEventListener('DOMContentLoaded', function(event) {
     let location = customLocationElement.textContent
     console.log(location)
   })
-
-
 })
