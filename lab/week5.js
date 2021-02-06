@@ -31,16 +31,6 @@ window.addEventListener('DOMContentLoaded', function(event) {
   // Your code ...
   let forecastElement = document.querySelector('#forecast-header')
 
-  async function getForecast(location){
-    // console.log(`${location} click!`)
-    // console.log(`Getting forecast for ${location}...`)
-    let myKey = 'd050620334a64120be721907210502'
-    let url = `https://api.weatherapi.com/v1/forecast.json?key=${myKey}&q=${location}&days=3`
-    let json = await fetch(url)
-    let forecast = await json.json()
-    // console.log(forecast)
-    return forecast
-  }
   function printForecast(forecast){
     forecastElement.innerHTML = ''
     for (let i = 0; i < forecast.forecast.forecastday.length; i++){
@@ -51,23 +41,36 @@ window.addEventListener('DOMContentLoaded', function(event) {
     }
   }
 
+  async function getForecast(location){
+    // console.log(`${location} click!`)
+    console.log(`Getting forecast for ${location}...`)
+    let myKey = 'd050620334a64120be721907210502'
+    let url = `https://api.weatherapi.com/v1/forecast.json?key=${myKey}&q=${location}&days=3`
+    let json = await fetch(url)
+    let forecast = await json.json()
+    printForecast(forecast)
+    // console.log(forecast)
+    // return forecast
+      }
+
   // let chicagoButton = document.querySelector('#chicago-forecast')
   let allButtons = document.querySelectorAll('.forecast-button')
   for (let j = 0; j < allButtons.length; j++){
     allButtons[j].addEventListener('click', async function(event){
         event.preventDefault()
-        let location = allButtons[j].textContent
+        let location = event.target.innerHTML
         // console.log(location)
-        let forecast = await getForecast(location)
-        printForecast(forecast)
+        getForecast(location)        
     })
   }
 
-  // let customLocationElement = document.querySelector('#location')
-  // let customLocationButton = 
-  // customLocationElement.addEventListener('submit', async function(event){
+  let customLocationElement = document.querySelector('#location')
+  let customLocationButton =  document.querySelector('#customButton')
+  customLocationButton.addEventListener('click', async function(event){
   //   Event on button click, use content of text box.
-  //   let location = customLocationElement.textContent
-  //   console.log(location)
-  // })
+    event.preventDefault()
+    let location = customLocationElement.value
+    // console.log(`Custom location is ${location}`)
+    getForecast(location)        
+  })
 })
