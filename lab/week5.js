@@ -63,11 +63,11 @@ window.addEventListener('DOMContentLoaded', function(event) {
     })
   }
 
-  let customLocationElement = document.querySelector('#location')
+  // let customLocationElement = document.querySelector('#location')
   // let customLocationButton = 
   // customLocationElement.addEventListener('submit', async function(event){
-    // Event on button click, use content of text box.
-    let location = customLocationElement.textContent
-    console.log(location)
-  })
+  //   Event on button click, use content of text box.
+  //   let location = customLocationElement.textContent
+  //   console.log(location)
+  // })
 })
